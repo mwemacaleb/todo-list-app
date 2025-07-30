@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const taskRoutes = require('./routes/tasks');
 
 // Initialize express app
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/api/tasks', taskRoutes);
 
 // Default route
 app.get('/', (req, res) => {
@@ -29,3 +31,4 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => {
     console.error('❌ MongoDB connection error:', err.message);
   });
+
